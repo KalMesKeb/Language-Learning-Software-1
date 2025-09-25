@@ -1,0 +1,49 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "title": "Greetings & Simple Sentences",
+      "level": "Beginner",
+      "sentences": [
+        {
+          "id": 101,
+          "english": "Good morning",
+          "amharic": "እደርሳለሁ አመሸ",
+          "alignment": [
+            {"eng":"Good","amh":"ጥሩ"},
+            {"eng":"morning","amh":"ጠዋት"}
+          ],
+          "notes": "Simple greeting"
+        },
+        {
+          "id": 102,
+          "english": "How are you?",
+          "amharic": "እንዴት ነህ?",
+          "alignment": [
+            {"eng":"How","amh":"እንዴት"},
+            {"eng":"are","amh":"ነህ"},
+            {"eng":"you","amh":"አንተ"}
+          ],
+          "notes": "Basic question"
+        },
+        {
+          "id": 103,
+          "english": "I am fine, thank you.",
+          "amharic": "እኔ ደህና ነኝ፣ እናመሰግናለን",
+          "alignment": [
+            {"eng":"I","amh":"እኔ"},
+            {"eng":"am","amh":"ነኝ"},
+            {"eng":"fine","amh":"ደህና"},
+            {"eng":"thank","amh":"እናመሰግናለን"},
+            {"eng":"you","amh":"ለአንተ"}
+          ],
+          "notes": "Response"
+        }
+      ],
+      "vocabulary": [
+        {"word":"Good","translation":"ጥሩ","example":"Good man"},
+        {"word":"morning","translation":"ጠዋት","example":"Good morning!"}
+      ]
+    }
+  ]
+}
