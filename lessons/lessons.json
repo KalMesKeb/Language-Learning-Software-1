@@ -131,8 +131,19 @@
         }
       ],
       "vocabulary": [
-        {"word":"Good","translation":"ጥሩ","example":"Good man"},
-        {"word":"morning","translation":"ጠዋት","example":"Good morning!"}
+        {"word":"Mr.","translation":"አቶ","example":"Mr. Abebe"},
+        {"word":"Mrs.","translation":"ወ/ሮ","example":"Mrs. Abeba"},
+        {"word":"is","translation":"ነው/ናት/ናቸው","example":"He is a man."},
+        {"word":"and","translation":"እና","example":"Kaleb and Samuel"},
+        {"word":"a man","translation":"ወንድ","example":"He is a man."},
+        {"word":"a woman","translation":"ሴት","example":"She is a woman."},
+        {"word":"a boy","translation":"ወንድ ልጅ","example":"He is a boy."},
+        {"word":"boys","translation":"ወንድ ልጆች","example":"They are boys."},
+        {"word":"a cat","translation":"ድመት","example":"He is a cat."},
+        {"word":"a dog","translation":"ውሻ","example":"He is a dog."},
+        {"word":"dogs","translation":"ውሻዎች","example":"They are dogs."},
+        {"word":"a girl","translation":"ሴት ልጅ","example":"She is a girl."},
+        {"word":"girls","translation":"ሴት ልጆች","example":"They are girls."}
       ]
     }
   ]
