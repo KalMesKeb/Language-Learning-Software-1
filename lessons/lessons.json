@@ -7,37 +7,127 @@
       "sentences": [
         {
           "id": 101,
-          "english": "Good morning",
-          "amharic": "እደርሳለሁ አመሸ",
+          "english": "Mr. Abebe is a man.",
+          "amharic": "አቶ አበበ ወንድ ነው።",
           "alignment": [
-            {"eng":"Good","amh":"ጥሩ"},
-            {"eng":"morning","amh":"ጠዋት"}
+            {"eng":"Mr.","amh":"አቶ"},
+            {"eng":"Abebe","amh":"አበበ"},
+            {"eng":"is","amh":"ነው"},
+            {"eng":"a man","amh":"ወንድ"}
           ],
-          "notes": "Simple greeting"
+          "notes": "A man = ወንድ"
         },
         {
           "id": 102,
-          "english": "How are you?",
-          "amharic": "እንዴት ነህ?",
+          "english": "Mrs. Abeba is a woman",
+          "amharic": "ወ/ሮ አበባ ሴት ናት።",
           "alignment": [
-            {"eng":"How","amh":"እንዴት"},
-            {"eng":"are","amh":"ነህ"},
-            {"eng":"you","amh":"አንተ"}
+            {"eng":"Mrs.","amh":"ወ/ሮ"},
+            {"eng":"Abeba","amh":"አበባ"},
+            {"eng":"is","amh":"ናት"},
+            {"eng":"a woman","amh":"ሴት"}
           ],
-          "notes": "Basic question"
+          "notes": "A woman = ሴት"
         },
         {
           "id": 103,
-          "english": "I am fine, thank you.",
-          "amharic": "እኔ ደህና ነኝ፣ እናመሰግናለን",
+          "english": "Kaleb is a boy and Samuel is a boy.",
+          "amharic": "ካሌብ ወንድ ልጅ ነው እና ሳሙኤል ወንድ ልጅ ነው።",
           "alignment": [
-            {"eng":"I","amh":"እኔ"},
-            {"eng":"am","amh":"ነኝ"},
-            {"eng":"fine","amh":"ደህና"},
-            {"eng":"thank","amh":"እናመሰግናለን"},
-            {"eng":"you","amh":"ለአንተ"}
+            {"eng":"Kaleb","amh":"ካሌብ"},
+            {"eng":"is","amh":"ነው"},
+            {"eng":"a boy","amh":"ወንድ ልጅ"},
+            {"eng":"and","amh":"እና"},
+            {"eng":"Samuel","amh":"ሳሙኤል"}
           ],
-          "notes": "Response"
+          "notes": "Boy:Man = ወንድ ልጅ:ወንድ"
+        },
+        {
+          "id": 104,
+          "english": "Kaleb and Samuel are boys.",
+          "amharic": "ካሌብ እና ሳሙኤል ወንድ ልጆች ናቸው።",
+          "alignment": [
+            {"eng":"Kaleb","amh":"ካሌብ"},
+            {"eng":"and","amh":"እና"},
+            {"eng":"Samuel","amh":"ሳሙኤል"},
+            {"eng":"are","amh":"ናቸው"},
+            {"eng":"boys","amh":"ወንድ ልጆች"}
+          ],
+          "notes": "Boy:Boys = ወንድ ልጅ:ወንድ ልጆች"
+        },
+        {
+          "id": 105,
+          "english": "Ruth is a girl and Sara is a girl.",
+          "amharic": "ሩት ሴት ልጅ ናት እና ሳራ ሴት ልጅ ናት።",
+          "alignment": [
+            {"eng":"Ruth","amh":"ሩት"},
+            {"eng":"is","amh":"ናት"},
+            {"eng":"a girl","amh":"ሴት ልጅ"},
+            {"eng":"and","amh":"እና"},
+            {"eng":"Sara","amh":"ሳራ"},
+            {"eng":"is","amh":"ናት"},
+            {"eng":"a girl","amh":"ሴት ልጅ"}
+          ],
+          "notes": "Girl:Woman = ሴት ልጅ:ሴት"
+        },
+        {
+          "id": 106,
+          "english": "Ruth and Sara are girls.",
+          "amharic": "ሩት እና ሳራ ሴት ልጆች ናቸው።",
+          "alignment": [
+            {"eng":"Ruth","amh":"ሩት"},
+            {"eng":"and","amh":"እና"},
+            {"eng":"Sara","amh":"ሳራ"},
+            {"eng":"are","amh":"ናቸው"},
+            {"eng":"girls","amh":"ሴት ልጆች"}
+          ],
+          "notes": "Girl:Girls = ሴት ልጅ:ሴት ልጆች"
+        },
+        {
+          "id": 107,
+          "english": "Bob is a cat.",
+          "amharic": "ቦብ ድመት ነው።",
+          "alignment": [
+            {"eng":"Bob","amh":"ቦብ"},
+            {"eng":"is","amh":"ነው"},
+            {"eng":"a cat","amh":"ድመት"}
+          ],
+          "notes": "A cat = ድመት"
+        },
+        {
+          "id": 108,
+          "english": "Jack is a dog.",
+          "amharic": "ጃክ ውሻ ነው።",
+          "alignment": [
+            {"eng":"Jack","amh":"ጃክ"},
+            {"eng":"is","amh":"ነው"},
+            {"eng":"a dog","amh":"ውሻ"}
+          ],
+          "notes": "A dog = ውሻ"
+        },
+        {
+          "id": 109,
+          "english": "Basha is a dog.",
+          "amharic": "ባሻ ውሻ ነው።",
+          "alignment": [
+            {"eng":"Basha","amh":"ባሻ"},
+            {"eng":"is","amh":"ነው"},
+            {"eng":"a dog","amh":"ውሻ"}
+          ],
+          "notes": "A dog = ውሻ"
+        },
+        {
+          "id": 110,
+          "english": "Jack and Basha are dogs.",
+          "amharic": "ጃክ እና ባሻ ውሻዎች ናቸው።",
+          "alignment": [
+            {"eng":"Jack","amh":"ጃክ"},
+            {"eng":"and","amh":"እና"},
+            {"eng":"Basha","amh":"ባሻ"},
+            {"eng":"are","amh":"ናቸው"},
+            {"eng":"dogs","amh":"ውሻዎች"}
+          ],
+          "notes": "Dog:Dogs = ውሻ:ውሻዎች"
         }
       ],
       "vocabulary": [
