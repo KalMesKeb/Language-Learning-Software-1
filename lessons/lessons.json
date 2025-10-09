@@ -2,7 +2,7 @@
   "lessons": [
     {
       "id": 1,
-      "title": "Greetings & Simple Sentences",
+      "title": "The Family",
       "level": "Beginner",
       "sentences": [
         {
@@ -38,7 +38,9 @@
             {"eng":"is","amh":"ነው"},
             {"eng":"a boy","amh":"ወንድ ልጅ"},
             {"eng":"and","amh":"እና"},
-            {"eng":"Samuel","amh":"ሳሙኤል"}
+            {"eng":"Samuel","amh":"ሳሙኤል"},
+            {"eng":"is","amh":"ነው"},
+            {"eng":"a boy","amh":"ወንድ ልጅ"}
           ],
           "notes": "Boy:Man = ወንድ ልጅ:ወንድ"
         },
