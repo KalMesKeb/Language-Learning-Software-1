@@ -1,4 +1,3 @@
-# db.py
 import sqlite3
 import json
 import os
@@ -15,7 +14,7 @@ def get_conn():
 
 def create_schema(conn):
     cur = conn.cursor()
-    # users: username unique, password stored hashed (we'll store plaintext hashed by simple method for demo)
+    
     cur.execute("""
     CREATE TABLE users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -75,7 +74,7 @@ def save_progress(user_id: int, progress: dict):
     conn = get_conn()
     cur = conn.cursor()
     enc = encrypt_bytes(json.dumps(progress).encode("utf-8"))
-    # replace or insert
+    
     cur.execute("SELECT id FROM progress WHERE user_id=?", (user_id,))
     row = cur.fetchone()
     if row:
