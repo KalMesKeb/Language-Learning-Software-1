@@ -1,4 +1,3 @@
-# tts_engine.py
 import pyttsx3
 import threading
 
@@ -8,7 +7,7 @@ class TTSEngine:
         self.rate = self.engine.getProperty("rate")
         self.voices = self.engine.getProperty("voices")
         self.voice_map = {v.id: v for v in self.voices}
-        # pick a default english voice
+        
         self.default_voice = self.voices[0].id if self.voices else None
 
     def list_voices(self):
