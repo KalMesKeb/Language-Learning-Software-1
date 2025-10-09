@@ -79,15 +79,15 @@ The software will be developed using Python and designed as a **fully offline, c
 **Modules:**
 
 1. **User Interface (UI)**:
-   - Built using `tkinter`, `PyQt`, or `Kivy` to provide a simple, user-friendly graphical interface for the Windows desktop environment.
+   - Built using `tkinter` to provide a simple, user-friendly graphical interface for the Windows desktop environment.
    - Language switching between English and Amharic with clear, easy navigation.
 
 2. **Text-to-Speech (TTS)**:
-   - Libraries: `pyttsx3` for offline TTS support for English and `gTTS` for Amharic TTS (or local Amharic TTS solutions).
+   - Libraries: `pyttsx3` for offline TTS support for English and local Amharic TTS solutions.
    - Pronunciation of words and sentences by clicking or hovering over them.
 
 3. **Natural Language Processing (NLP)**:
-   - Use of `spaCy` or `nltk` for local sentence parsing and tokenization to break down English sentences and align them with Amharic structure.
+   - Use of `nltk` for local sentence parsing and tokenization to break down English sentences and align them with Amharic structure.
    - Offline analysis tools will handle morphology and grammatical analysis for both English and Amharic.
 
 4. **Database**:
@@ -104,9 +104,9 @@ The software will be developed using Python and designed as a **fully offline, c
 - **Operating System**: Windows 7/10/11.
 - **Python Version**: Python 3.x.
 - **Libraries**:
-  - `tkinter`, `PyQt`, or `Kivy` for UI.
-  - `pyttsx3`, `gTTS` for TTS.
-  - `nltk`, `spaCy` for NLP.
+  - `tkinter` for UI.
+  - `pyttsx3` for TTS.
+  - `nltk` for NLP.
   - `SQLite` for local database management.
 
 ---
