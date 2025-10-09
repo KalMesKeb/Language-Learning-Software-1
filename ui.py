@@ -1,4 +1,3 @@
-# ui.py
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 import json
@@ -37,12 +36,10 @@ class AppUI:
             for s in l.get("sentences", []):
                 sentences.append(Sentence(id=s["id"], english=s["english"], amharic=s["amharic"], alignment=s.get("alignment", []), notes=s.get("notes", "")))
             lessons.append(Lesson(id=l["id"], title=l["title"], level=l.get("level", "Beginner"), sentences=sentences, vocabulary=l.get("vocabulary", [])))
-            # cache to DB (encrypted)
             cache_lessons(l["id"], l)
         return lessons
 
     def setup_ui(self):
-        # top frame: login/register or profile
         top = ttk.Frame(self.root)
         top.pack(side=tk.TOP, fill=tk.X, padx=8, pady=8)
 
@@ -53,11 +50,9 @@ class AppUI:
         ttk.Button(top, text="Register", command=self.register_dialog).pack(side=tk.RIGHT, padx=4)
         ttk.Button(top, text="Settings", command=self.settings_dialog).pack(side=tk.RIGHT, padx=4)
 
-        # main panes
         main = ttk.Panedwindow(self.root, orient=tk.HORIZONTAL)
         main.pack(fill=tk.BOTH, expand=True, padx=8, pady=8)
 
-        # left: lesson list
         left_frame = ttk.Frame(main, width=300)
         main.add(left_frame, weight=1)
         ttk.Label(left_frame, text="Lessons").pack(anchor=tk.W)
@@ -67,7 +62,6 @@ class AppUI:
             self.lesson_list.insert(tk.END, f"{l.id} - {l.title} ({l.level})")
         self.lesson_list.bind("<<ListboxSelect>>", self.on_lesson_select)
 
-        # center: lesson details / DIT
         center_frame = ttk.Frame(main)
         main.add(center_frame, weight=3)
         header = ttk.Frame(center_frame)
@@ -81,7 +75,6 @@ class AppUI:
         ttk.Button(self.sentence_nav, text="Previous", command=self.prev_sentence).pack(side=tk.LEFT)
         ttk.Button(self.sentence_nav, text="Next", command=self.next_sentence).pack(side=tk.LEFT)
 
-        # DIT area
         self.dit_frame = ttk.Frame(center_frame)
         self.dit_frame.pack(fill=tk.BOTH, expand=True, padx=6, pady=6)
         self.eng_text = tk.Text(self.dit_frame, height=4, wrap=tk.WORD)
@@ -91,7 +84,6 @@ class AppUI:
         self.eng_text.config(state=tk.DISABLED)
         self.amh_text.config(state=tk.DISABLED)
 
-        # bottom: exercises & vocab
         bottom = ttk.Frame(self.root)
         bottom.pack(side=tk.BOTTOM, fill=tk.X, padx=8, pady=8)
         ttk.Button(bottom, text="Vocabulary Builder", command=self.open_vocab_builder).pack(side=tk.LEFT, padx=4)
@@ -99,11 +91,9 @@ class AppUI:
         self.progress_label = ttk.Label(bottom, text="Progress: N/A")
         self.progress_label.pack(side=tk.RIGHT)
 
-        # state
         self.lesson_index = None
         self.sentence_index = 0
 
-    # --- auth dialogs ---
     def register_dialog(self):
         d = tk.Toplevel(self.root)
         d.title("Register")
@@ -150,7 +140,6 @@ class AppUI:
             self.current_user = info["username"]
             self.current_user_id = info["id"]
             self.user_label.config(text=f"Logged in: {self.current_user}")
-            # load progress
             self.progress = load_progress(self.current_user_id) or {}
             self.update_progress_ui()
             d.destroy()
@@ -168,7 +157,6 @@ class AppUI:
         sp.pack(fill=tk.X, padx=6)
         def save():
             self.tts.set_rate(int(sp.get()))
-            # save to profile
             info = get_user(self.current_user)
             if info:
                 prof = info.get("profile", {})
@@ -179,7 +167,6 @@ class AppUI:
             d.destroy()
         ttk.Button(d, text="Save", command=save).pack(pady=6)
 
-    # --- lesson navigation & DIT display ---
     def on_lesson_select(self, event):
         idx = self.lesson_list.curselection()
         if not idx:
@@ -197,13 +184,11 @@ class AppUI:
         if not (0 <= self.sentence_index < len(self.selected_lesson.sentences)):
             return
         s = self.selected_lesson.sentences[self.sentence_index]
-        # show english and amharic with word-level clickable spans
         self.eng_text.config(state=tk.NORMAL)
         self.amh_text.config(state=tk.NORMAL)
         self.eng_text.delete("1.0", tk.END)
         self.amh_text.delete("1.0", tk.END)
 
-        # insert english tokens and tag them for click
         eng_words = split_words(s.english)
         for i, w in enumerate(eng_words):
             tag = f"eng_{i}"
@@ -213,8 +198,6 @@ class AppUI:
             self.eng_text.tag_add(tag, start_index, end_index)
             self.eng_text.tag_bind(tag, "<Button-1>", lambda e, idx=i: self.on_eng_click(idx))
             self.eng_text.tag_config(tag, underline=True)
-        # amharic: for alignment show words in same order as provided alignment if present
-        # If alignment present, show aligned amh tokens in order
         if s.alignment:
             for i, pair in enumerate(s.alignment):
                 w = pair.get("amh", "")
@@ -235,32 +218,26 @@ class AppUI:
         self.eng_text.config(state=tk.DISABLED)
         self.amh_text.config(state=tk.DISABLED)
 
-        # show grammar hints (POS tags) below
         tags = tokenize_and_tag(s.english)
         grammar_hint = " | ".join([f"{t}:{p}" for t,p in tags])
-        # display in a small label
         if hasattr(self, "grammar_label"):
             self.grammar_label.config(text=grammar_hint)
         else:
             self.grammar_label = ttk.Label(self.dit_frame, text=grammar_hint, foreground="gray")
             self.grammar_label.pack(anchor=tk.W, pady=4)
 
-        # update progress tracker
         self.update_progress_for_sentence(self.selected_lesson.id, s.id)
 
     def on_eng_click(self, idx):
-        # display translation and grammar for the clicked english word by index
         s = self.selected_lesson.sentences[self.sentence_index]
         if idx < len(s.alignment):
             pair = s.alignment[idx]
             eng = pair.get("eng", "")
             amh = pair.get("amh", "")
-            # show a small popup with TTS buttons
             d = tk.Toplevel(self.root)
             d.title(f"Word: {eng}")
             ttk.Label(d, text=f"English: {eng}").pack(anchor=tk.W, padx=6, pady=4)
             ttk.Label(d, text=f"Amharic: {amh}").pack(anchor=tk.W, padx=6, pady=4)
-            # example grammatical note
             ttk.Label(d, text=f"Note: {s.notes or '—'}").pack(anchor=tk.W, padx=6, pady=4)
             ttk.Button(d, text="Play English", command=lambda: self.tts.say_async(eng)).pack(side=tk.LEFT, padx=6, pady=6)
             ttk.Button(d, text="Play Amharic", command=lambda: self.tts.say_async(amh)).pack(side=tk.LEFT, padx=6, pady=6)
@@ -292,8 +269,7 @@ class AppUI:
         if lang == 'en':
             self.tts.say_async(s.english)
         else:
-            # amharic may or may not have a dedicated voice; attempt to use system voice for Amharic
-            # Try set a voice with 'amh' or 'amharic' in its name; else fallback
+            # amharic does not have a dedicated voice yet
             chosen = None
             for vid, v in self.tts.voice_map.items():
                 lname = str(v.name).lower()
@@ -317,11 +293,9 @@ class AppUI:
         if not self.current_user:
             self.progress_label.config(text="Progress: Not logged in")
             return
-        # compute summary
         total_seen = sum(len(v.get("seen", [])) for v in self.progress.values())
         self.progress_label.config(text=f"Progress: {total_seen} items seen")
 
-    # --- Vocabulary builder & exercises ---
     def open_vocab_builder(self):
         if not self.selected_lesson:
             messagebox.showinfo("Select lesson", "Please select a lesson first.")
@@ -340,11 +314,11 @@ class AppUI:
             if not sel:
                 return
             val = tree.item(sel[0], "values")[0]
-            # extract english word before ' — '
+            
             eng = val.split("—")[0].strip()
-            # play english then amharic translation
+            
             self.tts.say_async(eng)
-            # find translation
+            
             for v in vs:
                 if v['word'] == eng:
                     self.tts.say_async(v['translation'])
@@ -360,7 +334,6 @@ class AppUI:
         nb = ttk.Notebook(d)
         nb.pack(fill=tk.BOTH, expand=True)
 
-        # matching
         frame1 = ttk.Frame(nb)
         nb.add(frame1, text="Matching")
         engs, amhs = generate_matching(self.selected_lesson.vocabulary)
@@ -381,7 +354,7 @@ class AppUI:
                 return
             e = left.get(sel_l[0])
             a = right.get(sel_r[0])
-            # verify
+
             correct = next((v for v in self.selected_lesson.vocabulary if v['word']==e), None)
             if correct and correct['translation']==a:
                 messagebox.showinfo("Correct", "Good job!")
@@ -389,16 +362,13 @@ class AppUI:
                 messagebox.showinfo("Try again", "Not a match.")
         ttk.Button(frame1, text="Check Match", command=check_matching).pack(pady=6)
 
-        # fill in the blank
         frame2 = ttk.Frame(nb)
         nb.add(frame2, text="Fill in the blank")
-        # pick a random sentence and a target vocab word
         import random
         sent = random.choice(self.selected_lesson.sentences)
         if self.selected_lesson.vocabulary:
             target = random.choice(self.selected_lesson.vocabulary)['word']
         else:
-            # fallback to first word
             target = sent.english.split()[0]
         blanked = generate_fill_blank(sent.english, target)
         ttk.Label(frame2, text=f"{blanked}").pack(padx=6, pady=6)
@@ -411,14 +381,13 @@ class AppUI:
                 messagebox.showinfo("Incorrect", f"Answer was: {target}")
         ttk.Button(frame2, text="Check", command=check_blank).pack(pady=6)
 
-        # multiple-choice
         frame3 = ttk.Frame(nb)
         nb.add(frame3, text="Multiple Choice")
-        # pick a sentence and create options from vocabulary
+
         if self.selected_lesson.vocabulary:
             vocab_words = [v['word'] for v in self.selected_lesson.vocabulary]
             q_word = vocab_words[0]
-            # build choices
+
             choices = vocab_words[:]
             while len(choices) < 4:
                 choices.append("placeholder")
