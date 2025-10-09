@@ -1,8 +1,6 @@
-# nlp_engine.py
 import nltk
 from nltk import word_tokenize, pos_tag
 
-# Ensure minimal data
 try:
     nltk.data.find("tokenizers/punkt")
 except LookupError:
@@ -16,4 +14,4 @@ except LookupError:
 def tokenize_and_tag(sentence: str):
     tokens = word_tokenize(sentence)
     tags = pos_tag(tokens)
-    return tags  # list of (token, pos)
+    return tags
